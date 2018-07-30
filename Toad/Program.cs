@@ -1,5 +1,5 @@
 ﻿using System;
-using Ribbit.NET;
+using Ribbit.Protocol;
 
 namespace TestTCP
 {
@@ -7,8 +7,10 @@ namespace TestTCP
     {
         static void Main(string[] args)
         {
-            var message = new RibbitMessage("v1/summary");
-            Console.WriteLine(message.parsed.TextBody);
+            var client = new Client("eu.version.battle.net", 1119);
+            client.Connect();
+            var response = client.Request("v1/products/wow/cdns");
+            Console.WriteLine(response);
         }
     }
 }
