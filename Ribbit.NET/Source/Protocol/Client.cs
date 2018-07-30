@@ -3,15 +3,24 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Ribbit.Protocol {
-    public class Client {
+using Ribbit.Constants;
+
+namespace Ribbit.Protocol
+{
+    public class Client
+    {
         private string host;
         private short port;
 
         private TcpClient socket;
         private NetworkStream stream;
 
-        public Client(string host, short port) 
+        public Client(Region region) : this(region.GetHostname(), 1119) 
+        { 
+
+        }
+
+        public Client(string host, short port)
         {
             this.host = host;
             this.port = port;
@@ -19,23 +28,27 @@ namespace Ribbit.Protocol {
             this.socket = new TcpClient();
         }
 
-        public void Connect() {
+        public void Connect()
+        {
             this.socket.Connect(this.host, this.port);
-            
+
             this.stream = this.socket.GetStream();
         }
 
-        public string Request(string endpoint) {
+        public string Request(string endpoint)
+        {
             var command = Encoding.ASCII.GetBytes(endpoint + Environment.NewLine);
             this.stream.Write(command);
 
             var writer = new MemoryStream();
             byte[] buffer = new byte[this.socket.ReceiveBufferSize];
 
-            do {
+            do
+            {
                 int readBytes = this.stream.Read(buffer, 0, buffer.Length);
-                
-                if (readBytes <= 0) {
+
+                if (readBytes <= 0)
+                {
                     break;
                 }
 
