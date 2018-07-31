@@ -12,8 +12,6 @@ namespace Ribbit.Protocol
         private string host;
         private short port;
 
-        private TcpClient socket;
-        private NetworkStream stream;
 
         public Client(Region region) : this(region.GetHostname(), 1119) 
         { 
@@ -24,39 +22,35 @@ namespace Ribbit.Protocol
         {
             this.host = host;
             this.port = port;
-
-            this.socket = new TcpClient();
-        }
-
-        public void Connect()
-        {
-            this.socket.Connect(this.host, this.port);
-
-            this.stream = this.socket.GetStream();
         }
 
         public Response Request(string endpoint)
         {
+
+            var socket = new TcpClient(this.host, this.port);
+            var stream = socket.GetStream();
+
             var command = Encoding.ASCII.GetBytes(endpoint + Environment.NewLine);
-            this.stream.Write(command);
+            stream.Write(command);
 
-            var writer = new MemoryStream();
-            byte[] buffer = new byte[this.socket.ReceiveBufferSize];
-
+            var responseBuffer = new MemoryStream();
             do
             {
-                int readBytes = this.stream.Read(buffer, 0, buffer.Length);
+                byte[] chunkBuffer = new byte[socket.ReceiveBufferSize];
+                int readBytes = stream.Read(chunkBuffer, 0, chunkBuffer.Length);
 
                 if (readBytes <= 0)
                 {
                     break;
                 }
 
-                writer.Write(buffer, 0, readBytes);
-            } while (this.stream.DataAvailable);
+                responseBuffer.Write(chunkBuffer, 0, readBytes);
+            } while (stream.DataAvailable);
 
-            var dataStream = (Stream)writer;
+            var dataStream = (Stream)responseBuffer;
             dataStream.Position = 0;
+
+            socket.Close();
 
             return new Response(dataStream);
         }
