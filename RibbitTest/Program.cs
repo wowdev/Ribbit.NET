@@ -3,7 +3,7 @@
 using Ribbit.Constants;
 using Ribbit.Protocol;
 
-namespace TestTCP
+namespace RibbitTest
 {
     class Program
     {

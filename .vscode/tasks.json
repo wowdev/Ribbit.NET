@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Toad/Toad.csproj"
+                "${workspaceFolder}/RibbitTest/RibbitTest.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

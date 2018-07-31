@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toad", "Toad\Toad.csproj", "{696AA3E7-5B06-4D6D-BAFD-64CE6BBE39A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RibbitTest", "RibbitTest\RibbitTest.csproj", "{696AA3E7-5B06-4D6D-BAFD-64CE6BBE39A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ribbit.NET", "Ribbit.NET\Ribbit.NET.csproj", "{75651A44-4C68-46B9-9C1C-3477E07D9E15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ribbit.NET", "Ribbit.NET\Ribbit.NET.csproj", "{75651A44-4C68-46B9-9C1C-3477E07D9E15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
