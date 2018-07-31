@@ -33,7 +33,7 @@ namespace Ribbit.Protocol
         public Dictionary<string, string> headers { get; private set; }
         public string Name { get; private set; }
 
-        public Stream data => this[this.Name].contents;
+        public Stream data => this.chunks.First().Value.contents;
         public Stream signature => this[SignatureChunkName].contents;
 
         public Response(string raw): this(new MemoryStream(Encoding.ASCII.GetBytes(raw)))
