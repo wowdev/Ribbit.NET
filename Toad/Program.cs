@@ -11,8 +11,8 @@ namespace TestTCP
         {
             var client = new Client(Region.US);
             client.Connect();
-            var response = client.Request("v1/products/wow/cdns");
-            Console.WriteLine(response);
+            var response = client.Request("v1/summary");
+            Console.WriteLine(response.ToString());
         }
     }
 }

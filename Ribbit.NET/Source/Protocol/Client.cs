@@ -35,7 +35,7 @@ namespace Ribbit.Protocol
             this.stream = this.socket.GetStream();
         }
 
-        public string Request(string endpoint)
+        public Response Request(string endpoint)
         {
             var command = Encoding.ASCII.GetBytes(endpoint + Environment.NewLine);
             this.stream.Write(command);
@@ -55,7 +55,10 @@ namespace Ribbit.Protocol
                 writer.Write(buffer, 0, readBytes);
             } while (this.stream.DataAvailable);
 
-            return Encoding.ASCII.GetString(writer.GetBuffer());
+            var dataStream = (Stream)writer;
+            dataStream.Position = 0;
+
+            return new Response(dataStream);
         }
     }
 }
