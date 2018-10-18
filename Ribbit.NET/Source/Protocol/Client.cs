@@ -45,7 +45,7 @@ namespace Ribbit.Protocol
                 }
 
                 responseBuffer.Write(chunkBuffer, 0, readBytes);
-            } while (stream.DataAvailable);
+            } while (true);
 
             var dataStream = (Stream)responseBuffer;
             dataStream.Position = 0;
