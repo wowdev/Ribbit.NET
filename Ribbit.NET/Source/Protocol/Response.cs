@@ -27,7 +27,7 @@ namespace Ribbit.Protocol
             }
         }
 
-        private MimeMessage message = null;
+        public MimeMessage message = null;
 
         public Dictionary<string, Chunk> chunks { get; private set; }
         public Dictionary<string, string> headers { get; private set; }
