@@ -10,7 +10,7 @@ namespace Ribbit.Parsing
 
         public BPSV(string content)
         {
-            var splitContent = content.Split("\n");
+            var splitContent = content.Split('\n');
             for (var i = 0; i < splitContent.Length; i++)
             {
                 var line = splitContent[i];
@@ -24,7 +24,7 @@ namespace Ribbit.Parsing
                     continue;
                 }
 
-                var splitLine = line.Split("|");
+                var splitLine = line.Split('|');
 
                 // Headers
                 if (i == 0)

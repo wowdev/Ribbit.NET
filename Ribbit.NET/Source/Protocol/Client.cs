@@ -31,7 +31,7 @@ namespace Ribbit.Protocol
             var stream = socket.GetStream();
 
             var command = Encoding.ASCII.GetBytes(endpoint + Environment.NewLine);
-            stream.Write(command);
+            stream.Write(command, 0, command.Length);
 
             var responseBuffer = new MemoryStream();
             do
